@@ -2,6 +2,7 @@ package com.stydy.study1;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stydy.study1.model.entity.User;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

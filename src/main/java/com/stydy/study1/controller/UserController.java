@@ -28,12 +28,19 @@ public class UserController {
     return userService.listAll();
   }
 
-  /** 按 id 查询：GET /user/searchUser?id=1 */
+  /**
+   * 按 id 查询：GET /user/1
+   * 返回数组：查到 [{...}]，查不到 []，状态码一律 200。
+   */
+  @GetMapping("/{id}")
+  public List<User> getById(@PathVariable Long id) {
+    return userService.searchUsersById(id);
+  }
+
+  /** 按 id 查询（查询参数写法，兼容旧调用）：GET /user/searchUser?id=1 */
   @GetMapping("/searchUser")
-  public ResponseEntity<User> searchUser(@RequestParam Long id) {
-    return userService.searchUserById(id)
-        .map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.notFound().build());
+  public List<User> searchUser(@RequestParam Long id) {
+    return userService.searchUsersById(id);
   }
 
   /** 按名称模糊查询：GET /user/search?keyword=ma */
